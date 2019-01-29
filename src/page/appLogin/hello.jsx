@@ -1,13 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router'
-import api from '../../publics/api.js'
+// import api from '../../publics/api.js'
 import style from './hello.scss'
-import apis from '../../publics/api'
+// import apis from '../../publics/api'
 // Material-UI
 import Button from '@material-ui/core/Button'
-import * as action from "../../redux/actions.jsx"
-import {createSelector} from "reselect"
+import * as action from '../../redux/actions.jsx'
+// import {createSelector} from 'reselect'
 // 函数类
 // function readonly(target, key, descriptor) {
 //   descriptor.value = () => {
@@ -25,30 +25,25 @@ import {createSelector} from "reselect"
 // }
 
 // 修饰符
-const withHeader = (name) => (WrappedComponent) => {
- return class HOC extends Component {
-  		constructor(){
-  			super()
-  			this.state = {
-  				data: name
-  			}
-  		}
-	    render() {
-	      return (
-          <div>
-            <div className={style.demoHeader}>{this.state.data}</div>
-            <WrappedComponent {...this.props}/>
-          </div>
-        )
-	    }
-	  }
+const withHeader = (name) => (WrappedComponent) => class HOC extends Component {
+  constructor() {
+    super()
+    this.state = {
+      data: name
+    }
   }
-
+  render() {
+    return (
+      <div>
+        <div className={style.demoHeader}>{this.state.data}</div>
+        <WrappedComponent {...this.props}/>
+      </div>
+    )
+  }
+}
 
 // 小组件分离
-const Apps = (props) => {
-  return <Button variant="contained" color="primary"> Hello2 {props.previewData} </Button>
-}
+const Apps = (props) => <Button variant="contained" color="primary"> Hello2 {props.previewData} </Button>
 
 @withHeader('2019')
 class App extends Component {
@@ -57,13 +52,13 @@ class App extends Component {
     return (
       <div onClick={() => {
         this.pointdebug()
-      }} className={style.textL}>
+      }} className = {style.textL}>
         <Apps {...this.props} />
       </div>
     )
   }
-  pointdebug () {
-    this.props.dispatch(action.addList("我是dispatch"))
+  pointdebug() {
+    this.props.dispatch(action.addList('我是dispatch'))
   }
 }
 
@@ -74,6 +69,5 @@ const mapToprops = (state) => {
     previewData
   }
 }
-
 
 export default withRouter(connect(mapToprops)(App))
