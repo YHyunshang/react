@@ -1,10 +1,29 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin') //css单独打包
-const HappyPack = require('happypack')
 const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
+const CssExtractLoader = MiniCssExtractPlugin.loader
+const CssLoader = {
+  loader: 'css-loader',
+  options: {
+    modules: true,
+    localIdentName: '[path][name]_[local]--[hash:base64:5]'
+  }
+}
+const PostcssLoader = {
+  loader: 'postcss-loader',
+  options: {
+    ident: 'postcss',
+    plugins: [
+      require('autoprefixer')
+    ]
+  }
+}
+
 const svgDirs = [
   require.resolve('antd-mobile').replace(/warn\.js$/, ''), // 1. 属于 antd-mobile 内置 svg 文件
   path.resolve(__dirname, 'src/images') // 2. 自己私人的 svg 存放目录
 ]
+
 module.exports = {
   rules: [
     {
@@ -18,53 +37,29 @@ module.exports = {
     },
     {
       test: /\.css$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              localIdentName: '[path][name]_[local]--[hash:base64:5]'
-            }
-          },
-          {
-            loader: 'postcss-loader'
-          }
-        ]
-      })
+      use: [
+        CssExtractLoader,
+        CssLoader,
+        PostcssLoader
+      ]
     },
     {
       test: /\.scss$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-              localIdentName: '[path][name]_[local]--[hash:base64:5]'
-            }
-          },
-          {
-            loader: 'postcss-loader'
-          },
-          {
-            loader: 'sass-loader'
-          }
-        ]
-      })
+      use: [
+        CssExtractLoader,
+        CssLoader,
+        PostcssLoader,
+        'sass-loader'
+      ]
     },
     {
       test: /\.less$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [
-          'css-loader',
-          'postcss-loader',
-          'less-loader'
-        ]
-      })
+      use: [
+        CssExtractLoader,
+        CssLoader,
+        PostcssLoader,
+        'less-loader'
+      ]
     },
     {
       test: /\.(svg)$/i,
