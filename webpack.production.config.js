@@ -54,8 +54,7 @@ module.exports = {
         collapseWhitespace: true //删除空白符与换行符
       }
     }),
-    new CleanWebpackPlugin(resolve('./dev')),
-    new Visualizer()
+    new CleanWebpackPlugin(resolve('./dev'))
   ],
   optimization: {
     splitChunks: {
