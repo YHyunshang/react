@@ -8,9 +8,6 @@ const path = require('path')
 const ServerS = require('./config/server.js')
 const proxys = require('./config/proxy.js')
 const webpackBase = require('./config/webpackBase.js')
-const HappyPack = require('happypack')
-const os = require('os')
-const HappyThreadPool = HappyPack.ThreadPool({size: os.cpus().length})
 
 function resolve(dir) {
   return path.resolve(__dirname, dir)
@@ -51,11 +48,6 @@ module.exports = {
         removeComments: true, //移除HTML中的注释
         collapseWhitespace: false //删除空白符与换行符
       }
-    }),
-    new HappyPack({
-      id: 'jsx',
-      threadPool: HappyThreadPool,
-      loaders: ['babel-loader']
     })
   ],
   resolve: {

@@ -1,6 +1,7 @@
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-
+const os = require('os')
+let cpuLength = os.cpus().length
 const CssExtractLoader = MiniCssExtractPlugin.loader
 const CssLoader = {
   loader: 'css-loader',
@@ -27,8 +28,19 @@ const svgDirs = [
 module.exports = {
   rules: [
     {
-      test: /\.js[x]?$/,
-      use: 'happypack/loader?id=jsx',
+      test: /\.(js|jsx)$/,
+      include: path.resolve('src'),
+      use: [
+        {
+          loader: 'thread-loader',
+          options: {
+            // 开销大的时候开启多线程，用node获取cpu数启动
+            workers: cpuLength
+          }
+        },
+        'babel-loader'
+        // 你的高开销的loader放置在此 (e.g babel-loader)
+      ],
       exclude: /node_modules/
     },
     {

@@ -6,11 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin') //生成html
 const path = require('path')
 const webpackBase = require('./config/webpackBase.js')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
-const HappyPack = require('happypack')
-const os = require('os')
-const HappyThreadPool = HappyPack.ThreadPool({size: os.cpus().length})
-const packagejson = require('./package.json')
-const Visualizer = require('webpack-visualizer-plugin')
+let CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
 
 function resolve(dir) {
   return path.resolve(__dirname, dir)
@@ -40,11 +36,6 @@ module.exports = {
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.LimitChunkCountPlugin({maxChunks: 15}),
     new webpack.optimize.MinChunkSizePlugin({minChunkSize: 10000}),
-    new HappyPack({
-      id: 'jsx',
-      threadPool: HappyThreadPool,
-      loaders: ['babel-loader']
-    }),
     new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
       filename: './index.html', //生成的html存放路径，相对于 path
       template: './public/index.html', //html模板路径
@@ -54,6 +45,7 @@ module.exports = {
         collapseWhitespace: true //删除空白符与换行符
       }
     }),
+    new CaseSensitivePathsPlugin(),
     new CleanWebpackPlugin(resolve('./dev'))
   ],
   optimization: {
@@ -70,7 +62,8 @@ module.exports = {
   },
   resolve: {
     modules: ['node_modules', resolve('./node_modules')],
-    extensions: ['.web.js', '.js', '.json', '.jsx'],
+    // extensions: ['.web.js', '.js', '.json', '.jsx'],
+    extensions: ['.js', '.json', '.jsx', '.css'],
     alias: {
       '@': './src'
     }
