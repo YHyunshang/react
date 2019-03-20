@@ -1,3 +1,7 @@
+/**
+ *  xuanshanbo
+ *  294662037@qq.com
+ */
 'use strict'
 
 const webpack = require('webpack')
@@ -7,7 +11,7 @@ const path = require('path')
 const webpackBase = require('./config/webpackBase.js')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 let CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
-
+// const TerserPlugin = require('terser-webpack-pclugin')
 function resolve(dir) {
   return path.resolve(__dirname, dir)
 }
@@ -31,7 +35,7 @@ module.exports = {
   module: webpackBase,
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[chunkhash].min.css'
+      filename: 'css/[name].[contenthash].min.css'
     }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.LimitChunkCountPlugin({maxChunks: 15}),
@@ -54,16 +58,20 @@ module.exports = {
         vendors: {
           test: /[\\/]node_modules[\\/]/,
           name: 'vendors',
-          filename: 'js/[name].bundle.[chunkhash].js',
+          filename: 'js/vendor/[name].bundle.[chunkhash].js',
           chunks: 'all'
         }
       }
     }
+    // minimizer: [
+    //   new TerserPlugin({
+    //     cache: true,
+    //   }),
+    // ]
   },
   resolve: {
     modules: ['node_modules', resolve('./node_modules')],
-    // extensions: ['.web.js', '.js', '.json', '.jsx'],
-    extensions: ['.js', '.json', '.jsx', '.css'],
+    extensions: ['.js', '.jsx', '.json', '.web.js'],
     alias: {
       '@': './src'
     }

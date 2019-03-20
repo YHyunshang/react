@@ -1,3 +1,6 @@
+/**
+ * xuanshanbo
+ */
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const os = require('os')

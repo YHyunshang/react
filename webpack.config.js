@@ -38,7 +38,7 @@ module.exports = {
   module: webpackBase,
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[chunkhash].min.css'
+      filename: 'css/[name].[contenthash].min.css'
     }),
     new HtmlWebpackPlugin({ //根据模板插入css/js等生成最终HTML
       filename: './index.html', //生成的html存放路径，相对于 path
@@ -52,7 +52,7 @@ module.exports = {
   ],
   resolve: {
     modules: ['node_modules', resolve('./node_modules')],
-    extensions: ['.web.js', '.js', '.json', '.jsx'],
+    extensions: ['.js', '.jsx', '.json', '.web.js'],
     alias: {
       '@': resolve('src')
     }
