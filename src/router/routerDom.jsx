@@ -2,7 +2,7 @@
 // import Loadable from 'react-loadable'
 // import Bundle from '../bundle.js'
 // import BlogPage from '../page/appIndex/aaa.jsx'
-import Hello from '../page/appLogin/holle.jsx'
+import Hello from '../page/appLogin/hello'
 
 // const LoadableComponent = () => (
 //   <Bundle load={BlogPage1}>
