@@ -2,6 +2,7 @@
  *  xuanshanbo
  *  294662037@qq.com
  */
+
 'use strict'
 
 const webpack = require('webpack')
@@ -30,7 +31,8 @@ module.exports = {
   output: {
     path: resolve('./dev'), //打包后的文件存放的地方
     filename: 'js/[name].[chunkhash].js',
-    chunkFilename: 'js/[id].[chunkhash].js'
+    chunkFilename: 'js/[id].[chunkhash].js',
+    publicPath: './'
   },
   module: webpackBase,
   plugins: [
