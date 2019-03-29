@@ -26,7 +26,7 @@ module.exports = {
     path: resolve('./dev'), //打包后的文件存放的地方
     filename: 'js/[name].[chunkhash].js',
     chunkFilename: 'js/[id].[chunkhash].js',
-    publicPath: './'
+    publicPath: '/'
   },
   devServer: {
     contentBase: './dev', //本地服务器所加载的页面所在的目录

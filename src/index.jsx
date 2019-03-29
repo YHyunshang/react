@@ -11,8 +11,8 @@ import {
 } from 'react-router-dom'
 import './publics/public.css'
 import servers from './redux/reduxServer'
-// import routerDom from './router/routerDom'
-import Hello from './page/appLogin/hello.jsx'
+import PrintA from './router/routerDom'
+// import PrintA from './page/appLogin/hello'
 // console.log(process.env.NODE_ENV)
 const enhancer = compose(
   //处理think
@@ -26,7 +26,7 @@ render(
     <Router>
       <Switch>
         {/* <Route path='/antd' component={routerDom.BlogPage1}/> */}
-        <Route path='/' component={Hello}/>
+        <Route path='/' component={PrintA.Hello}/>
       </Switch>
     </Router>
   </Provider>,

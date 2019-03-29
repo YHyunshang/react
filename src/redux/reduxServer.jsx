@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux' //数据合并
+import {combineReducers} from 'redux'
 import {ADD_TODO} from './actions.jsx'
 
 // redux共享数据处理
