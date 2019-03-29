@@ -1,4 +1,13 @@
+## 目录结构说明
+```
+先 npm install
+npm run dev	测试环境
+npm run build 生产环境
 
+图片引入improt img from "src"
+less scss引入 import style from "src"
+如果不用此类方式 将config/weboackBase.js下的options下的设置为 modules:false
+```
 ## react规范说明
 ## 请遵守eslint书写规范
 
