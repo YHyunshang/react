@@ -2,63 +2,78 @@ import axios from 'axios'
 import ApiList from './api.json'
 import _ from 'lodash'
 let CancelToken = axios.CancelToken
+let cancel
+/*
+ * 设置请求头
+ * 设置请求时间
+ */
+axios.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8'
+axios.defaults.timeout = 60000
 
-//获取url请求
-const getUrl = key => {
-  if (typeof ApiList[key] === 'undefined' || ApiList[key] === '') {
-    return ''
-  }
-  let url = ApiList[key]
-  return url
-}
+// // request 请求前拦截器
+axios.interceptors.request.use((config) =>
+  config
+  , (error) =>
+  Promise.reject(error)
+)
 
-// 请求封装
-const apiServer = (method, url, data, params) => {
-  const sec = 10 * 1000
-  let postData = {}
-  let _data = _.assign({}, data)
-  _.forEach(_data, (val, key) => {
-    if (['timeout'].indexOf(key) === -1) {
-      postData[key] = val
-    }
-  })
-  let timeout = _data.timeout || sec
-  return axios({
-    method,
-    url,
-    data: postData,
-    params,
-    timeout,
-    withCredentials: true,
-    headers: {
-      'Content-Type': 'application/json; charset=utf-8'
-    },
-    CancelToken: new CancelToken(((c) => {
-
-    })),
-    // `onUploadProgress` 允许为上传处理进度事件
-    onUploadProgress(progressEvent) {
-      // 对原生进度事件的处理
-    },
-    // // `onDownloadProgress` 允许为下载处理进度事件
-    onDownloadProgress(progressEvent) {
-      // 对原生进度事件的处理
-    }
-  })
-    .then((resp) => { // 错误码处理
-      if (resp.data.status > 200) {
-        //处理错误样式处
+// 请求后response,响应拦截器
+axios.interceptors.response.use(
+  response => response.data, error => {
+    console.log(error)
+    if (error.response !== undefined) {
+      switch (error.response.status) {
+        case 400:
+          console.log('400')
+          break
+        case 401:
+          console.log('会话已失效! 请重新登录')
+          break
+        case 402:
+          console.log('登陆超时')
+          break
+        case 403:
+          console.log('没有权限！')
+          break
+        default:
+          console.log(`错误${error.response.status}`)
       }
-      return resp
-    })
-    .catch((err) =>
-      //处理错误样式处
+      return Promise.resolve(error.response)
+    }
+    return Promise.resolve(error)
+  })
 
-      Promise.reject(new Error(err))
-    )
-}
+// http请求
+export default class Server {
+   static api = (method, url, data, params) => {
+     let postData = {}
+     let _data = _.assign({}, data)
+     _.forEach(_data, (val, key) => {
+       if (['timeout'].indexOf(key) === -1) {
+         postData[key] = val
+       }
+     })
+     return axios({
+       method,
+       url,
+       data: postData,
+       params,
+       withCredentials: true,
+       CancelToken: new CancelToken(((c) => {
+         cancel = c
+       }))
+     })
+   }
 
-export default {
-  apiServer,
-  getUrl
+  /***
+ * url获取
+ * key传入路径
+ */
+  static getUrl = key => {
+    if (typeof ApiList[key] === 'undefined' || ApiList[key] === '') {
+      return ''
+    }
+    let url = ApiList[key]
+    return url
+  }
 }

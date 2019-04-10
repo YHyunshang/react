@@ -1,7 +1,7 @@
 const Env = {
   dev: { // 开发
-    '/api': {
-      target: 'http://10.67.54.88:3000',
+    '/cad': {
+      target: 'http://localhost:3000',
       secure: false,
       changeOrigin: true
     }
