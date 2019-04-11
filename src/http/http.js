@@ -11,16 +11,15 @@ axios.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8'
 axios.defaults.timeout = 60000
 
 // // request 请求前拦截器
-axios.interceptors.request.use((config) =>
-  config
-  , (error) =>
-  Promise.reject(error)
-)
+// axios.interceptors.request.use((config) =>
+//   config
+//   , (error) =>
+//   Promise.reject(error)
+// )
 
 // 请求后response,响应拦截器
 axios.interceptors.response.use(
   response => response.data, error => {
-    console.log(error)
     if (error.response !== undefined) {
       switch (error.response.status) {
         case 400:
@@ -41,35 +40,36 @@ axios.interceptors.response.use(
       return Promise.resolve(error.response)
     }
     return Promise.resolve(error)
-  })
+  }
+)
 
 // http请求
-export default class Server {
-   static api = (method, url, data, params) => {
-     let postData = {}
-     let _data = _.assign({}, data)
-     _.forEach(_data, (val, key) => {
-       if (['timeout'].indexOf(key) === -1) {
-         postData[key] = val
-       }
-     })
-     return axios({
-       method,
-       url,
-       data: postData,
-       params,
-       withCredentials: true,
-       CancelToken: new CancelToken(((c) => {
-         cancel = c
-       }))
-     })
-   }
+export default class HTTP {
+  static api(method, url, data, params) {
+    let postData = {}
+    let _data = _.assign({}, data)
+    _.forEach(_data, (val, key) => {
+      if (['timeout'].indexOf(key) === -1) {
+        postData[key] = val
+      }
+    })
+    return axios({
+      method,
+      url,
+      data: postData,
+      params,
+      withCredentials: true,
+      CancelToken: new CancelToken(((c) => {
+        cancel = c
+      }))
+    })
+  }
 
   /***
  * url获取
  * key传入路径
  */
-  static getUrl = key => {
+  static getUrl(key) {
     if (typeof ApiList[key] === 'undefined' || ApiList[key] === '') {
       return ''
     }
