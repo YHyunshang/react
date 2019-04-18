@@ -1,6 +1,6 @@
 ## 目录结构说明
 ```
-先 npm install
+npm install
 npm run dev	测试环境
 npm run build 生产环境
 
@@ -9,7 +9,23 @@ less scss引入 import style from "src"
 如果不用此类方式 将config/weboackBase.js下的options下的设置为 modules:false
 ```
 ## react规范说明
-## 请遵守eslint书写规范
+
+### 单元测试
+```js
+// 使用npm run karma
+// 测试用例：参考地址: https://mochajs.org/#getting-started
+// karma配置测试js的进出口，支持es6
+files: [
+	'./src/http/test.js', //要测试代码的位置
+	'./_test_/*.js' //测试用例地址
+],
+preprocessors: {
+	'./src/http/test.js': ['babel', 'coverage'], //es6编译测试代码的位置
+	'./_test_/*.js': ['babel'] //es6编译测试用例地址
+},
+```	
+
+### 请遵守eslint书写规范
 
 - 组件中处理事件（onClick, onChange等）的方法，命名以handler为前缀；只在组件其他方法中调用的方法，命名以_为前缀；反之需要作为props向子元素传递的方法，不需要_；
 
@@ -44,7 +60,7 @@ less scss引入 import style from "src"
 ```
 
 
-## 常用命令
+### 常用命令
 ```
 | 命令            | 作用&效果          |
 | --------------- | ------------- |
@@ -54,7 +70,7 @@ less scss引入 import style from "src"
 ```
 
 
-## 目录结构说明
+### 目录结构说明
 ```
 react 基建项目gutlap下载地址： http://10.0.71.125/xuansb/react-Infrastructure-PC.git
 项目可选择UI库为： antd - antd-mobild - material-ui
@@ -82,17 +98,4 @@ react 基建项目gutlap下载地址： http://10.0.71.125/xuansb/react-Infrastr
 ├─ webpack.production.config.js # 打包环境配置
 ```
 
-## 单元测试
-```js
-// 使用npm run karma
-// 测试用例：参考地址: https://mochajs.org/#getting-started
-// karma配置测试js的进出口，支持es6
-files: [
-	'./src/http/test.js', //要测试代码的位置
-	'./_test_/*.js' //测试用例地址
-],
-preprocessors: {
-	'./src/http/test.js': ['babel', 'coverage'], //es6编译测试代码的位置
-	'./_test_/*.js': ['babel'] //es6编译测试用例地址
-},
-```	
+
