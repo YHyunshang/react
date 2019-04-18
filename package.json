@@ -8,7 +8,8 @@
     "test": "webpack --config ./webpack.production.config.js --progress -p",
     "build": "webpack --config ./webpack.production.config.js --progress -p",
     "lint": "eslint --ext .js src",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "karma": "karma start"
   },
   "author": "Terry",
   "license": "MIT",
@@ -87,7 +88,17 @@
     "webpack-dev-server": "3.1.14",
     "webpack-merge": "4.2.1",
     "webpack-uglify-parallel": "0.1.4",
-    "webpack-visualizer-plugin": "0.1.11"
+    "webpack-visualizer-plugin": "0.1.11",
+    "babel-plugin-transform-es2015-modules-umd": "^6.24.1",
+    "chai": "^4.2.0",
+    "karma": "^4.1.0",
+    "karma-babel-preprocessor": "^6.0.1",
+    "karma-chai": "^0.1.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage": "^1.1.2",
+    "karma-mocha": "^1.3.0",
+    "karma-mocha-reporter": "^2.2.5",
+    "mocha": "^6.1.3"
   },
   "dependencies": {
     "case-sensitive-paths-webpack-plugin": "^2.2.0",

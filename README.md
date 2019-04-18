@@ -59,11 +59,14 @@ less scss引入 import style from "src"
 react 基建项目gutlap下载地址： http://10.0.71.125/xuansb/react-Infrastructure-PC.git
 项目可选择UI库为： antd - antd-mobild - material-ui
 
+├─ _test_ # 单元测试地址
 ├─ config # webpack配置资源地
+├─ coverage # 测试用例
 ├─ node_modules # 利用npm管理的所有包及其依赖
 ├─ dev # 打包后文件
 ├─ public # 公共依耐资源
 ├─ src
+	├─ http # 请求地址封装
 	├─ images # 静态图片存放地区
 	├─ page # 页面
 	├─ publics # 公共资源
@@ -74,6 +77,26 @@ react 基建项目gutlap下载地址： http://10.0.71.125/xuansb/react-Infrastr
 	├─ api # 处理各页面接口请求
 ├─ .babelrc # 启动依耐包
 ├─ packge.json # 启动配置
+├─ karma.conf # karma配置区
 ├─ webpack.config.js # 开发环境配置
 ├─ webpack.production.config.js # 打包环境配置
 ```
+
+## 单元测试
+```
+	使用npm run karma
+	测试用例：参考地址: https://mochajs.org/#getting-started
+
+	karma配置测试js的进出口，支持es6
+	分别为：
+```
+```js
+	files: [
+      './src/http/test.js', //要测试代码的位置
+      './_test_/*.js'//测试用例地址
+    ],
+    preprocessors: {
+      './src/http/test.js': ['babel', 'coverage'], //es6编译测试代码的位置
+      './_test_/*.js': ['babel'] //es6编译测试用例地址
+    },
+```	

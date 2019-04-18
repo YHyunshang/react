@@ -5,8 +5,7 @@
       "stage-0"
     ],
     "plugins": [
-    	'transform-decorators-legacy', 
-    	'transform-class-properties',
-      'react-hot-loader/babel' 
-    ]
+      "transform-es2015-modules-umd"
+    ],
+    "auxiliaryCommentBefore": "istanbul ignore next"
   }
