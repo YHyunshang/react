@@ -5,7 +5,8 @@
       "stage-0"
     ],
     "plugins": [
-      "transform-es2015-modules-umd"
+      "transform-es2015-modules-umd",
+      "transform-decorators-legacy"
     ],
     "auxiliaryCommentBefore": "istanbul ignore next"
   }

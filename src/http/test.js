@@ -1,10 +1,9 @@
 export default class Polygon {
-  constructor(x, y) {
-    this.height = x
-    this.width = y
+  constructor() {
+
   }
 
-  static calcArea(x, y) {
+  calcArea(x, y) {
     return x + y
   }
 }

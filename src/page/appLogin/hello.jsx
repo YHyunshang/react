@@ -6,7 +6,7 @@ import style from './hello.scss'
 import Button from '@material-ui/core/Button'
 import * as action from '../../redux/actions.jsx'
 // import {createSelector} from 'reselect'
-import R from '@/http/http'
+import api from '../../http/http'
 
 // 小组件分离
 const Apps = (props) => <Button variant="contained" color="primary"> Hello2 {props.previewData} </Button>
@@ -42,8 +42,8 @@ class App extends Component {
   }
   reduxPrint() {
     this.props.dispatch(action.addList('我是dispatch'))
-    R.api('post', '/cad/abc', {data: '1'}, {}).then((data) => {
-      console.log(data)
+    api.api('post', '/cad/abc', {data: '1'}, {}).then((data) => {
+      // console.log(data)
     })
   }
 }

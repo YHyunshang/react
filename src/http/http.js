@@ -60,7 +60,7 @@ export default class HTTP {
       params,
       withCredentials: true,
       CancelToken: new CancelToken(((c) => {
-        cancel = c
+        // cancel = c
       }))
     })
   }

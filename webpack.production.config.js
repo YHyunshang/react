@@ -12,6 +12,7 @@ const path = require('path')
 const webpackBase = require('./config/webpackBase.js')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 let CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 // const TerserPlugin = require('terser-webpack-pclugin')
 function resolve(dir) {
   return path.resolve(__dirname, dir)
@@ -52,7 +53,8 @@ module.exports = {
       }
     }),
     new CaseSensitivePathsPlugin(),
-    new CleanWebpackPlugin(resolve('./dev'))
+    new CleanWebpackPlugin(resolve('./dev')),
+    new ProgressBarPlugin()
   ],
   optimization: {
     splitChunks: {

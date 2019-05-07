@@ -9,16 +9,16 @@ module.exports = function(config) {
     frameworks: ['mocha', 'chai'],
     // 测试文件入口
     files: [
-      './src/http/test.js',
-      './_test_/*.js'
+      'src/http/test.js',
+      '_test_/*.js'
     ],
     // 需要排除的文件
     exclude: [
     ],
     // 文件测试前的环境编译
     preprocessors: {
-      './src/http/test.js': ['babel', 'coverage'],
-      './_test_/*.js': ['babel']
+      'src/http/test.js': ['babel', 'coverage'],
+      '_test_/*.js': ['babel']
     },
     mochaReporter: {
       colors: {
@@ -50,7 +50,7 @@ module.exports = function(config) {
     // 日志等级: config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
     autoWatch: true,
-    browsers: ['Chrome'],
+    browsers: ['Chrome', 'Safari'],
     singleRun: false,
     // 并非级别
     concurrency: Infinity
