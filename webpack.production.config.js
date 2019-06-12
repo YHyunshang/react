@@ -58,12 +58,22 @@ module.exports = {
   ],
   optimization: {
     splitChunks: {
+      chunks: 'all',
+      minSize: 3000,
       cacheGroups: {
-        vendors: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendors',
-          filename: 'js/vendor/[name].bundle.[chunkhash].js',
-          chunks: 'all'
+        reactMin: {
+          test: /react-redux|react-router|react-router-dom|react-dom|react-flip-move/,
+          name: 'reactMin',
+          enforce: true,
+          minChunks: 1,
+          filename: 'js/reactMin/[name].bundle.[chunkhash].js'
+        },
+        vendor: {
+          test: /material-ui/,
+          name: 'vendor',
+          enforce: true,
+          minChunks: 1,
+          filename: 'js/vendor/[name].bundle.[chunkhash].js'
         }
       }
     }
