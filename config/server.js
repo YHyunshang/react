@@ -1,3 +1,7 @@
+/**
+ * xuanshanbo
+ * 代理服务
+ */
 module.exports = {
   host: 'localhost', //本地服务ip
   port: 8080, //端口

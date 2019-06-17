@@ -1,6 +1,6 @@
 /**
  *  xuanshanbo
- *  294662037@qq.com
+ *  开发环境
  */
 const HtmlWebpackPlugin = require('html-webpack-plugin') //生成html
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')

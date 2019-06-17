@@ -1,5 +1,6 @@
 /**
  * xuanshanbo
+ * webpack基础配置
  */
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
