@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2020-07-17 10:28:41
+ * @LastEditTime: 2020-08-12 13:34:45
+ * @LastEditors: your name
+ * @Description: In User Settings Edit
+ * @FilePath: /react/YH-react/webpack.config.js
+ */
 /**
  *  xuanshanbo
  *  开发环境
@@ -16,6 +24,7 @@ function resolve(dir) {
 module.exports = {
   devtool: 'eval',
   mode: 'development',
+  target: 'node',
   entry: {
     app: [
       'babel-polyfill',

@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
-import {render} from 'react-dom'
+import {render,hydrate} from 'react-dom'
+import ReactDOMServer from 'react-dom/server';
 import {createStore, applyMiddleware, compose} from 'redux'
 import {Provider} from 'react-redux'
 import thunk from 'redux-thunk'
@@ -9,13 +10,11 @@ import {
   Route,
   Switch
 } from 'react-router-dom'
+import {renderToString} from 'react-dom/server'
 import './publics/public.css'
 import servers from './redux/reduxServer'
 import PrintA from './router/routerDom'
-// import PrintA from './page/appLogin/hello'
-// console.log(process.env.NODE_ENV)
 const enhancer = compose(
-  //处理think
   applyMiddleware(thunk, createLogger()),
   window.devToolsExtension ? window.devToolsExtension() : f => f
 )
