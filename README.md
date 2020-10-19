@@ -1,101 +1,194 @@
-## 目录结构说明
+<!-- 请将以下一级标题设为项目名称 -->
+# 永辉 React 项目脚手架
+
+![node version][node-version-img] ![npm version][npm-version-img] ![webpack version][webpack-version-img] ![react version][react-version-img]
+
+## 开发
+
+### 开发前准备
+
+> ⚠️ 为保证环境一致，请使用 `node@10.14.2` / `npm@6.4.1`，并使用永辉 npm registry `http://npm.yonghui.cn/repository/npm-group/`
+
+
+> ⚠️ 如果要集成到 itwork 容器发布，请将 `chart/RENAME-TO-YOUR-PROJECTNAME/Chart.yaml` 中的 `name` 值配置为你的项目名称；并修改 `chart` 目录，将 `RENAME-TO-YOUR-PROJECTNAME` 目录名更新为你的项目名称
+
+推荐使用 [nvm][nvm-link] 进行本地 node 版本管理，[nrm][nrm-link] 进行本地 npm registry 管理：
+
+```bash
+npm install -g nvm nrm
+
+nvm install 10.14.2
+nvm use 10.14.2
+
+# set v10.14.2 as default node version
+# nvm alias default v10.14.2
+
+nrm add yonghui http://npm.yonghui.cn/repository/npm-group/
+nrm use yonghui
 ```
-npm install
-npm run dev	测试环境
-npm run build 生产环境
 
-图片引入improt img from "src"
-less scss引入 import style from "src"
-如果不用此类方式 将config/weboackBase.js下的options下的设置为 modules:false
+### Scripts
+
+```bash
+# dev
+npm start
+npm run dev
+
+# build for specific environment
+npm run build-dev   # 以 production 模式打包出开发环境（API）的包
+npm run build-test  # 以 production 模式打包出测试环境（API）的包
+npm run build-prod  # 以 production 模式打包出生产环境（API）的包
+
+# lint
+npm run lint
 ```
-## react规范说明
 
-### 单元测试
-```js
-// 使用npm run karma
-// 测试用例：参考地址: https://mochajs.org/#getting-started
-// karma配置测试js的进出口，支持es6
-files: [
-	'./src/http/test.js', //要测试代码的位置
-	'./_test_/*.js' //测试用例地址
-],
-preprocessors: {
-	'./src/http/test.js': ['babel', 'coverage'], //es6编译测试代码的位置
-	'./_test_/*.js': ['babel'] //es6编译测试用例地址
-},
-```	
 
-### 请遵守eslint书写规范
+## 代码与 commit message 规范
 
-- 组件中处理事件（onClick, onChange等）的方法，命名以handler为前缀；只在组件其他方法中调用的方法，命名以_为前缀；反之需要作为props向子元素传递的方法，不需要_；
+项目采用 [Husky][husky-link] 结合 [eslint][eslint-link] / [commitlint][commitlint-link] 进行代码与 Git Commit 规范性强约束，在 commit 前会自动运行 eslint 并尽可能自动修复不规范的代码，同时检查 commit message 是否规范。**请严格遵循 eslint / commitlint 规范约束**，否则将不能进行代码提交。
 
-- 调用组件，如果需要传递多个属性，则分行显示；同理，import一个文件中多个对象时，同样分行显示；
+⚠️ 已知 sourceTree 默认不支持 git hooks，请通过以下方法开启（参考 [SourceTree and pre commit hook][SourceTree-and-pre-commit-hook-link] ）：
+1. 打开 `SourceTree -> Preferences -> Git`
+2. 在 `Git Version` 块，点击 `Use System Git` 使用系统 git
 
-- actions定义集中在reduxn内
+### React/ JavaScript
 
-- api接口定义请独立抽离, A.js:处理A页面里面的所有的js请求，B.js：处理B页面的所有请求；以名词+动词形式命名；全部大写，以_为分隔符，如：NAME_GET；
+请参考 [Airbnb JavaScript Style Guide][airbnb-codestyle-link]
 
-### css class
+### Commit Message
+
+参考 [Conventional Commits][convertional-commits-link]，与 [Angular Commit Message Guidelines][angular-commit-message-guidelines-link]，Commit Message 格式为：
+```
+<type>(<scope>): <subject>
+<BLANK LINE>
+<body>
+<BLANK LINE>
+<footer>
+```
+
+示例:
+```
+feat(login): add oauth login method
+
+1. oauth redirect url
+2. exchange token with oauth code
+```
+
+type 可选：
+* **build**: 本次提交改变到了打包流程
+* **ci**: 本次提交影响到了 CI 脚本
+* **docs**: 本次提交更新了文档
+* **feat**: 引入了新的功能
+* **fix**: 修复 bug
+* **perf**: 提升性能
+* **refactor**: 既不是新增功能也不是修复 bug
+* **style**: 样式修改
+* **test**: 测试用例修改
+
+### CSS / LESS
+
 1. 使用中划线命名法，如：`indicator-text`
-2. 公共组件命名规则：`comp__<compName>[__<compElement>]`，如 `comp__panel__tips` 表示 Panel 公用组件的 tips 块
+2. 公共组件命名规则：`comp__<compName>]`，如 `comp__panel` 表示 Panel 公用组件
+3. 组件内部样式请置于组件根 class 内部（局部作用）
 
-### JS
-1. 采用小驼峰命名法，如 `dialogVisible`
-2. 对于 Boolean 类型的变量，灵活使用 is、shall、able（如 visible、clickable）等
-3. 禁止采用 A、B、C 等不明所以的单词作变量名
-4. 事件回调函数加上 'handle' 前缀，如 `handleCurrentRowChange`
-5. 导入 src 下的模块时不要使用绝对路径，推荐使用项目中定义的别名 `@`，注意`@`后加`/`，如 '@/public' 编译后为'src/public'
-6. 推荐使用 lodash 模块进行对象合并等操作，而非 es6，后者可能有浏览器兼容性问题
-7. html 字符串作为变量值时，注意文本的可视化与 html 的结构化，提高阅读性
-8. 禁止父组件通过 $refs 直接调用子组件方法、修改数据！
+### 其他约束
 
-### 模块
+1. 推荐使用模块化暴露内部功能（index.js 中导出必要功能）
+2. 公共组件请在同级目录书写 `README.md` 文档
+3. 模块导入推荐使用 `webpack alias`，参考 `webpack.config/base.js`
+
+
+## 目录结构说明
+
 ```
-  以_为分隔符；
-  每个页面包括：页面容器container、页面组件components、页面相关actions、页面样式style
-
-  1）container：页面主文件，与页面相关的component和action都会import到container中
-  2）components：页面拆分的组件，以拆分的模块功能命名
-  3）style：命名与components对应，并统一导入index.less，在container中引用
+.
+├── Dockerfile                        # 发布相关 docker image 配置
+├── README.md
+├── babel.config.json                 # babel 配置
+├── chart                             # 发布相关 itwork 配置
+│   └── space-display-front
+│       ├── Chart.yaml
+│       ├── README.md
+│       ├── templates
+│       │   ├── _helpers.tpl
+│       │   └── deployment.yaml
+│       └── values.yaml
+├── default.conf                      # nginx 配置
+├── env-config                        # 项目环境配置
+│   └── dev.js                        # dev 环境
+├── package-lock.json
+├── package.json
+├── public
+│   └── index.html
+├── src
+│   ├── App.jsx
+│   ├── App.less
+│   ├── components                    # 公共组件
+│   │   ├── HOC                       # 公用高阶组件
+│   │   │   └── index.js
+│   │   ├── business                  # 公用业务组件
+│   │   │   └── index.js
+│   │   └── ui                        # 公用 UI 组件
+│   │       └── index.js
+│   ├── http                          # HTTP 请求封装
+│   │   ├── api-config.js             # api 配置
+│   │   ├── client.js                 # http client 封装
+│   │   ├── index.js
+│   │   ├── request.interceptors.js   # axios 请求拦截器集
+│   │   └── response.interceptors.js  # axios 响应拦截器集
+│   ├── images
+│   │   └── logo.svg
+│   ├── index.jsx
+│   ├── router                        # 路由配置
+│   │   └── index.js
+│   ├── services                      # 服务封装
+│   │   └── index.js
+│   ├── store                         # redux
+│   │   └── index.js
+│   ├── styles
+│   │   └── base.less
+│   └── utils                         # 工具集
+│       └── index.js
+└── webpack-config                    # webpack 配置
+    ├── base.js
+    ├── dev.js
+    └── prod.js
 ```
 
 
-### 常用命令
-```
-| 命令            | 作用&效果          |
-| --------------- | ------------- |
-| npm run build   |  打包用于生产环境的代码 |
-| npm run dev     | 打包开发环境的代码，未压缩 |
-| npm run test   | 打包用于测试环境的代码，项目不同此处自行增加 |
-```
+## CI 自动化构建
+
+项目采用 gitlab ci 自动构建，主要分为 4 个 stage：
+
+0. **info**：手动触发，打印 node、npm 等环境
+1. **install**：手动触发，安装 package 依赖，当有依赖更新时请手动触发，否则可能编译失败
+2. **build**：自动触发，根据环境（分支名称）打包
+3. **deploy**：自动触发，构建 Docker Image，输出版本号
+
+> build 时 API 环境与分支名称关系：
+> - `prod` 环境对应 `master 分支`、`tags`、`release-* 分支`
+> - `test` 环境对应 `test-* 分支`
+> - `dev` 环境对应 `dev-* 分支`
 
 
-### 目录结构说明
-```
-react 基建项目gutlap下载地址： http://10.0.71.125/xuansb/react-Infrastructure-PC.git
-项目可选择UI库为： antd - antd-mobild - material-ui
+## 公共组件
 
-├─ _test_ # 单元测试地址
-├─ config # webpack配置资源地
-├─ coverage # 测试用例
-├─ node_modules # 利用npm管理的所有包及其依赖
-├─ dev # 打包后文件
-├─ public # 公共依耐资源
-├─ src
-	├─ http # 请求地址封装
-	├─ images # 静态图片存放地区
-	├─ page # 页面
-	├─ publics # 公共资源
-	├─ redux # redux配置文件
-	├─ router # 路由存放地区
-	├─ Bundles.js # 按需引入js
-	├─ index.js # 入口文件
-	├─ api # 处理各页面接口请求
-├─ .babelrc # 启动依耐包
-├─ packge.json # 启动配置
-├─ karma.conf # karma配置区
-├─ webpack.config.js # 开发环境配置
-├─ webpack.production.config.js # 打包环境配置
-```
+<!-- 请将组件说明文档链于此处 -->
 
 
+
+[node-version-img]: https://img.shields.io/badge/node-v10.14.2-brightgreen?style=flat-square&logo=node.js
+[npm-version-img]: https://img.shields.io/badge/npm-v6.4.1-brightgreen?style=flat-square&logo=npm
+[webpack-version-img]: https://img.shields.io/badge/webpack-v5.1.0-brightgreen?style=flat-square&logo=webpack
+[react-version-img]: https://img.shields.io/badge/react-v16.13.1-brightgreen?style=flat-square&logo=react
+
+[nvm-link]: https://img.shields.io/badge/node-v10.14.2-brightgreen
+[nrm-link]: https://github.com/Pana/nrm
+[airbnb-codestyle-link]: https://github.com/airbnb/javascript
+[convertional-commits-link]: https://www.conventionalcommits.org/en/v1.0.0/
+[husky-link]: https://github.com/typicode/husky
+[commitlint-link]: https://commitlint.js.org
+[eslint-link]: https://eslint.org
+[SourceTree-and-pre-commit-hook-link]: https://medium.com/fantageek/sourcetree-and-pre-commit-hook-52545f22fe10
+[angular-commit-message-guidelines-link]: https://github.com/angular/angular/blob/22b96b9/CONTRIBUTING.md#-commit-message-guidelines

@@ -1,0 +1,43 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+{{ include "service.labels.standard" . | indent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+{{ include "service.labels.standard" . | indent 6 }}
+  template:
+    metadata:
+      labels:
+{{ include "service.labels.standard" . | indent 8 }}
+    spec:
+{{- if .Values.volumesNfs }}
+      volumes:
+      - name: {{ .Values.volumesNfs.name }}
+        nfs:
+          server: {{ .Values.volumesNfs.server }}
+          path: {{ .Values.volumesNfs.path }}
+{{- end }}
+      containers:
+      - name: {{ .Release.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Chart.Version }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+{{- if .Values.volumesNfs }}
+        volumeMounts:
+        - name: {{ .Values.volumesNfs.name }}
+          mountPath: {{ .Values.volumesNfs.mountPath }}
+{{- end }}
+        ports:
+        - name: http
+          containerPort: {{ .Values.service.port }}
+          protocol: TCP
+{{- if .Values.containers }}
+{{- if and .Values.containers.probe (not (empty .Values.containers.probe)) }}
+{{ toYaml .Values.containers.probe | indent 8 }}
+{{- end }}
+{{- end }}
+        resources:
+{{ toYaml .Values.resources | indent 12 }}

@@ -1,0 +1,36 @@
+env:
+  browser: true
+  es2020: true
+extends:
+  - 'plugin:react/recommended'
+  - airbnb
+parser: babel-eslint
+parserOptions:
+  ecmaFeatures:
+    jsx: true
+  ecmaVersion: 11
+  sourceType: module
+plugins:
+  - react
+settings:
+  import/resolver:
+    alias:
+      map:
+        - ['@', ./src]
+        - ['@ui-comps', ./src/components/ui]
+        - ['@biz-comps', ./src/components/business]
+        - ['@hoc', ./src/components/HOC]
+        - ['@images', ./src/images]
+        - ['@utils', ./src/utils]
+        - ['@conf', ./env-config/dev]
+        - ['@utils', ./src/utils]
+        - ['@http', './src/http']
+      extensions: [.js, .jsx]
+rules: 
+  semi: [ error, never ]
+  no-nested-ternary: [ off ]
+  import/no-extraneous-dependencies: [ error, { devDependencies: ['webpack-config/*.js'] } ]
+  import/prefer-default-export: [ warn ]
+  react/jsx-props-no-spreading: [ off ]
+  react/prop-types: [ error, { ignore: ['children'] } ]
+  react/require-default-props: [ warn ]
