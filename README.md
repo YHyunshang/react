@@ -140,11 +140,11 @@ type 可选：
 │   ├── images
 │   │   └── logo.svg
 │   ├── index.jsx
-│   ├── router                        # 路由配置
+│   ├── route                         # 路由配置
 │   │   └── index.js
 │   ├── services                      # 服务封装
 │   │   └── index.js
-│   ├── store                         # redux
+│   ├── redux                         # redux
 │   │   └── index.js
 │   ├── styles
 │   │   └── base.less
