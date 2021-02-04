@@ -22,7 +22,7 @@ const PostcssLoader = {
   },
 }
 
-module.exports = (isProductionMode) => ({
+module.exports = (isProductionMode)=>({
   entry: './src/index.jsx',
   output: {
     path: resolve('./dist'), // 打包后的文件存放的地方
