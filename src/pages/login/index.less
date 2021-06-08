@@ -1,0 +1,43 @@
+.page__login {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .container {
+    width: 720px;
+    height: 440px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px 2px 16px 0px rgba(0, 0, 0, 0.09);
+    padding: 24px 0 24px 24px;
+    display: flex;
+  }
+
+  .left-img {
+    flex-shrink: 0;
+    width: 320px;
+    height: 392px;
+    background-color: rgba(235, 235, 235, 1);
+  }
+
+  .right-form {
+    width: 100%;
+    padding: 0 48px;
+
+    h1 {
+      line-height: 32px;
+      color: rgba(65, 63, 82, 100);
+      font-size: 24px;
+    }
+
+    .ant-form-item-control-input-content {
+      .ant-input, .ant-input-password {
+        &, &:focus, &:hover {
+          border: none!important;
+        }
+      }
+      border-bottom: 1px solid rgba(0, 0, 0, 0.65);;
+    }
+  }
+}

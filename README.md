@@ -1,7 +1,7 @@
 <!-- 请将以下一级标题设为项目名称 -->
 # 永辉 React 项目脚手架
 
-![node version][node-version-img] ![npm version][npm-version-img] ![webpack version][webpack-version-img] ![react version][react-version-img]
+![node version][node-version-img] ![npm version][npm-version-img] ![webpack version][webpack-version-img] ![react version][react-version-img] ![ant design version][antd-version-img]
 
 ## 开发
 
@@ -178,10 +178,11 @@ type 可选：
 
 
 
-[node-version-img]: https://img.shields.io/badge/node-v10.14.2-brightgreen?style=flat-square&logo=node.js
+[node-version-img]: https://img.shields.io/badge/node-v10.14.2-brightgreen?style=flat-square&logo=node
 [npm-version-img]: https://img.shields.io/badge/npm-v6.4.1-brightgreen?style=flat-square&logo=npm
 [webpack-version-img]: https://img.shields.io/badge/webpack-v5.1.0-brightgreen?style=flat-square&logo=webpack
 [react-version-img]: https://img.shields.io/badge/react-v16.13.1-brightgreen?style=flat-square&logo=react
+[antd-version-img]: https://img.shields.io/badge/antd-v4.16.2-brightgreen?style=flat-square&logo=ant-design&logoColor=0170FE
 
 [nvm-link]: https://img.shields.io/badge/node-v10.14.2-brightgreen
 [nrm-link]: https://github.com/Pana/nrm

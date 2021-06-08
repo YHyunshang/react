@@ -60,7 +60,7 @@
   },
   "dependencies": {
     "@loadable/component": "^5.13.2",
-    "antd": "^4.7.0",
+    "antd": "^4.16.2",
     "axios": "^0.20.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",

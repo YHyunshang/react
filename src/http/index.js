@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { HOSTS } from '@conf'
+import { hosts as HOSTS } from '@conf'
 
 import {
   withAuthHeader,

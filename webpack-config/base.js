@@ -22,7 +22,7 @@ const PostcssLoader = {
   },
 }
 
-module.exports = (isProductionMode)=>({
+module.exports = (isProductionMode) => ({
   entry: './src/index.jsx',
   output: {
     path: resolve('./dist'), // 打包后的文件存放的地方
@@ -115,6 +115,7 @@ module.exports = (isProductionMode)=>({
         removeComments: true, // 移除HTML中的注释
         collapseWhitespace: true, // 删除空白符与换行符
       },
+      favicon: './public/favicon.ico',
     }),
     new CaseSensitivePathsPlugin(),
   ],
