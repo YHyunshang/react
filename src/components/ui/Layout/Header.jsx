@@ -9,6 +9,7 @@ const isProd = /prod.*/i.test(env)
 function Header() {
   return (
     <header className="comp__layout-header">
+      {/* TODO: change your logo here */}
       <img className="img-logo" src={logo} alt="logo" />
       <span>
         {!isProd && <Tag color="blue">{envName}</Tag>}
