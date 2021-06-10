@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-  BrowserRouter as Router,
+  BrowserRouter,
   Route,
   Switch,
 } from 'react-router-dom'
@@ -9,13 +9,13 @@ import Login from '@/pages/login'
 
 function Routes() {
   return (
-    <Layout>
-      <Router>
+    <BrowserRouter>
+      <Layout>
         <Switch>
           <Route key="login" path="/login" component={Login} />
         </Switch>
-      </Router>
-    </Layout>
+      </Layout>
+    </BrowserRouter>
   )
 }
 export default Routes
